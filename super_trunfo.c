@@ -1,106 +1,62 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <locale.h> // Biblioteca necess·ria para idiomas
+#include <locale.h>
 
+// MOLDE DA CARTA
+typedef struct {
+    char estado[1];
+    char codigo[2];
+    char nome[30];
+    int populacao;
+    float area;
+    int pturistico;	
+    float pib;
+    float densidade;
+} Carta;
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+// PARTE L√ìGICA
+Carta calcular_dados(Carta c) {
+    
+	c.densidade = (float)c.populacao / c.area;
+	return c;
+    
+}
 
+// SA√çDA - IMPRIMIR CARTAS
+void exibir_carta(Carta c) {
+    printf("\n--- Dados da Cidade: %s ---\n", c.nome);
+    printf("C√≥digo: %s%s\n", c.estado, c.codigo);
+    printf("Nome da Cidade: %s \n", c.nome);
+    printf("Popula√ß√£o: %d\n", c.populacao);
+    printf("√Årea: %.2f \n", c.area);
+    printf("PIB: %.2f bilh√µes de reais", c.pib);
+    printf("N√∫mero de Pontos Tur√≠sticos: %d", c.pturistico); 	
+    printf("Densidade: %.2f hab/km¬≤\n", c.densidade);
+    printf("---------------------------\n");
+}
+
+// CORPO PRINCIPAL DO C√ìDIGO
 int main() {
-	setlocale(LC_ALL, "Portuguese_Brazil");
-	
-	
-	//CARTA 1
-	char estado1[1];
-	char codigo1[2];
-	char NomeCidade1[25];
-	int populacao1;
-	float area1;
-	float pib1;
-	int landmarks1;
-	
-	//CARTA 2
-	char estado2[1];
-	char codigo2[2];
-	char NomeCidade2[25];
-	int populacao2;
-	float area2;
-	float pib2;
-	int landmarks2;
-	
-	//Leitura da Carta 1
-	printf("Ol·, usu·rio! Hoje jogaremos um jogo, onde vocÍ criar· duas cartas de super trunfo.\n");
-	printf("#########################################################################.\n");
-	printf(" ~~ ~~ Carta 1 ~~ ~~\n");
-	printf("Diga-me uma letra de 'A' a 'H'.\n");
-	scanf("%s",&estado1);
-	printf("Digite dois algarismos para ser o cÛdigo da Carta 1.\n");
-	scanf("%s", &codigo1);
-	printf("Diga o nome de uma cidade.\n");
-	scanf("%s", &NomeCidade1);
-	printf("Diga a populaÁ„o dessa cidade.\n");
-	scanf("%d", &populacao1);
-	printf("Diga a ·rea dessa cidade.\n");
-	scanf("%f", &area1);
-	printf("Diga o PIB dessa cidade.\n");
-	scanf("%f", &pib1);
-	printf("Quantos pontos turÌsticos h· nessa cidade?\n");
-	scanf("%d",&landmarks1);
-	printf("#########################################################################.\n");
-	
-	//Leitura da Carta 2
-	
-	printf("Agora vocÍ dir· os dados da segunda carta.\n");
-	printf("#########################################################################.\n");
-	printf(" ~~ ~~ Carta 2 ~~ ~~\n");
-	printf("Diga-me uma letra de 'A' a 'H'.\n");
-	scanf("%s",&estado2);
-	printf("Digite dois algarismos para ser o cÛdigo da Carta 1.\n");
-	scanf("%s", &codigo2);
-	printf("Diga o nome de uma cidade.\n");
-	scanf("%s", &NomeCidade2);
-	printf("Diga a populaÁ„o dessa cidade.\n");
-	scanf("%d", &populacao2);
-	printf("Diga a ·rea dessa cidade.");
-	scanf("%f", &area2);
-	printf("Diga o PIB dessa cidade.");
-	scanf("%f", &pib2);
-	printf("Quantos pontos turÌsticos h· nessa cidade?");
-	scanf("%d",&landmarks2);
-	printf("#########################################################################.\n");
-	
-	
-	//Apresentando as cartas
-	
-	printf("Agora veja as suas cartas!\n");
-	printf(" ~~ ~~ Carta 1 ~~ ~~\n");
-	printf("Estado: %s \n",estado1);
-	printf("CÛdigo: %s %s \n", estado1, codigo1);
-	printf("Nome da cidade: %s \n", NomeCidade1);
-	printf("PopulaÁ„o: %d \n", populacao1);
-	printf("¡rea: %.2f Km≤ \n", area1);
-	printf("PIB: %.2f bilhıes de reais \n",pib1);
-	printf("N˙mero de Pontos TurÌsticos: %d \n", landmarks1);	
-	
+    setlocale(LC_ALL, "Portuguese_Brazil");
 
-	printf(" ~~ ~~ Carta 2 ~~ ~~\n");
-	printf("Estado: %s \n",estado2);
-	printf("CÛdigo: %s %s \n", estado2, codigo2);
-	printf("Nome da cidade: %s \n", NomeCidade2);
-	printf("PopulaÁ„o: %d \n", populacao2);
-	printf("¡rea: %.2f Km≤ \n", area2);
-	printf("PIB: %.2f bilhıes de reais \n",pib2);
-	printf("N˙mero de Pontos TurÌsticos: %d \n", landmarks2);
-	
-	printf("#########################################################################.\n");
-	printf("Fim de jogo! Obrigado por testar o meu cÛdigo. \n");
-	printf("Desenvolvido por Dian Carvalho.");
-	
-	
-	
-	
-	
-	
-	
-	
-	return 0;
+    Carta c1, c2; // CRIA√á√ÉO DE DUAS CARTAS DO MOLDE
+
+    // ENTRADA DOS DADOS
+    printf("Nome Cidade 1: ");   	 scanf("%s", c1.nome);
+    printf("Popula√ß√£o: ");       	 scanf("%d", &c1.populacao);
+    printf("√Årea: ");            	 scanf("%f", &c1.area);
+    
+
+    printf("\nNome Cidade 2: "); 	 scanf("%s", c2.nome);
+    printf("Popula√ß√£o: ");      	 scanf("%d", &c2.populacao);
+    printf("√Årea: ");           	 scanf("%f", &c2.area);
+
+    // PARTE L√ìGICA
+    c1 = calcular_dados(c1);
+    c2 = calcular_dados(c2);
+
+    // EXIBI√á√ÉO DOS DADOS
+    exibir_carta(c1);
+    exibir_carta(c2);
+
+    return 0;
 }
